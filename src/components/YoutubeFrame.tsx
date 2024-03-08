@@ -2,9 +2,10 @@ import { useState } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Input } from "@/components/ui/input";
 import urlParser from "js-video-url-parser";
+import { defaultVideoId } from "@/lib/utils";
 
 function YoutubeFrame() {
-  const [videoId, setVideoId] = useState("");
+  const [videoId, setVideoId] = useState(defaultVideoId);
 
   return (
     <>
@@ -23,7 +24,7 @@ function YoutubeFrame() {
       </div>
       <Input
         className="my-2"
-        placeholder="Youtube Link"
+        placeholder="Youtube Video Link"
         onChange={(e) => {
           const parseResult = urlParser.parse(e.target.value);
           if (parseResult?.id) setVideoId(parseResult.id);

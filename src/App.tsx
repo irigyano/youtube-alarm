@@ -1,16 +1,33 @@
+import { useState } from "react";
 import Clock from "./components/Clock";
+import TimePicker from "./components/TimePicker";
 import YoutubeFrame from "./components/YoutubeFrame";
+import { ThemeProvider } from "@/components/theme-provider";
 
-function youtubeRedirect(url: string) {
-  window.location.replace(url);
-}
+import { Button } from "./components/ui/button";
+import { Clock as ClockIcon } from "lucide-react";
 
 function App() {
+  const [triggerTime, setTriggerTime] = useState<Date>(new Date());
+
   return (
-    <div className="bg-zinc-800 min-h-screen flex flex-col px-[10%] lg:px-[30%] py-10">
-      <YoutubeFrame />
-      <Clock />
-    </div>
+    <ThemeProvider defaultTheme="dark">
+      <div className="flex flex-col px-[10%] lg:px-[30%] py-10">
+        <YoutubeFrame />
+        <div className="flex flex-col items-center">
+          <TimePicker
+            date={triggerTime}
+            setDate={(e) => {
+              setTriggerTime(e!);
+            }}
+          />
+          <Button className="m-2">
+            <ClockIcon />
+          </Button>
+          <Clock />
+        </div>
+      </div>
+    </ThemeProvider>
   );
 }
 

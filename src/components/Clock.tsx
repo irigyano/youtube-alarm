@@ -14,7 +14,7 @@ function Clock() {
     };
   }, []);
 
-  return <div>{time}</div>;
+  return <div className="text-center">{time}</div>;
 }
 
 export default Clock;
