@@ -1,12 +1,14 @@
-import { useState } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Input } from "@/components/ui/input";
 import urlParser from "js-video-url-parser";
-import { defaultVideoId } from "@/lib/utils";
 
-function YoutubeFrame() {
-  const [videoId, setVideoId] = useState(defaultVideoId);
-
+function YoutubeFrame({
+  videoId,
+  setVideoId,
+}: {
+  videoId: string;
+  setVideoId: React.Dispatch<React.SetStateAction<string>>;
+}) {
   return (
     <>
       <div>
