@@ -26,7 +26,7 @@ function YoutubeFrame({
       </div>
       <Input
         className="my-2"
-        placeholder="Youtube Video Link"
+        placeholder="Youtube 影片連結"
         onChange={(e) => {
           const parseResult = urlParser.parse(e.target.value);
           if (parseResult?.id) setVideoId(parseResult.id);

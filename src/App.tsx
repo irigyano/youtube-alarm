@@ -1,14 +1,17 @@
 import { useState } from "react";
-import Clock from "./components/Clock";
 import TimePicker from "./components/TimePicker";
 import YoutubeFrame from "./components/YoutubeFrame";
 import { ThemeProvider } from "@/components/theme-provider";
-import CountdownButton from "./components/CountdownButton";
+import Countdown from "./components/Countdown";
 import { defaultVideoId } from "@/lib/utils";
 
 function App() {
-  const [triggerTime, setTriggerTime] = useState<Date>(new Date());
-  const [countdownTime, setCountdownTime] = useState(0);
+  // In order to use feature provided by TimePicker,
+  // We have to initialize a Date object,
+  // Note only hh-mm-ss matters here, while Y-M-D doesn't.
+  const [triggerTime, setTriggerTime] = useState<Date>(
+    new Date("2024-03-09T00:05:00")
+  );
   const [videoId, setVideoId] = useState(defaultVideoId);
   const [isCounting, setIsCounting] = useState(false);
 
@@ -22,14 +25,15 @@ function App() {
             setDate={(e) => {
               setTriggerTime(e!);
             }}
+            isCounting={isCounting}
           />
-          <CountdownButton
+          <Countdown
             videoId={videoId}
             triggerTime={triggerTime}
+            setTriggerTime={setTriggerTime}
+            isCounting={isCounting}
             setIsCounting={setIsCounting}
-            setCountdownTime={setCountdownTime}
           />
-          <Clock isCounting={isCounting} countdownTime={countdownTime} />
         </div>
       </div>
     </ThemeProvider>
