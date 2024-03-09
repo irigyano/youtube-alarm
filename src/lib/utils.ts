@@ -27,3 +27,11 @@ export function formatMilliseconds(milliseconds: number) {
 }
 
 export const defaultVideoId = "B_rAI7zaVZU";
+
+export function parseDateToTimer(date: Date) {
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
+
+  return { hours, minutes, seconds };
+}

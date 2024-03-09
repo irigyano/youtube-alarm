@@ -5,9 +5,14 @@ import { useRef } from "react";
 interface TimePickerDemoProps {
   date: Date | undefined;
   setDate: (date: Date | undefined) => void;
+  isCounting: boolean;
 }
 
-export default function TimePickerDemo({ date, setDate }: TimePickerDemoProps) {
+export default function TimePickerDemo({
+  date,
+  setDate,
+  isCounting,
+}: TimePickerDemoProps) {
   const minuteRef = useRef<HTMLInputElement>(null);
   const hourRef = useRef<HTMLInputElement>(null);
   const secondRef = useRef<HTMLInputElement>(null);
@@ -16,7 +21,7 @@ export default function TimePickerDemo({ date, setDate }: TimePickerDemoProps) {
     <div className="flex items-end gap-2">
       <div className="grid gap-1 text-center">
         <Label htmlFor="hours" className="text-xs">
-          Hours
+          時
         </Label>
         <TimePickerInput
           picker="hours"
@@ -24,11 +29,12 @@ export default function TimePickerDemo({ date, setDate }: TimePickerDemoProps) {
           setDate={setDate}
           ref={hourRef}
           onRightFocus={() => minuteRef.current?.focus()}
+          disabled={isCounting}
         />
       </div>
       <div className="grid gap-1 text-center">
         <Label htmlFor="minutes" className="text-xs">
-          Minutes
+          分
         </Label>
         <TimePickerInput
           picker="minutes"
@@ -37,11 +43,12 @@ export default function TimePickerDemo({ date, setDate }: TimePickerDemoProps) {
           ref={minuteRef}
           onLeftFocus={() => hourRef.current?.focus()}
           onRightFocus={() => secondRef.current?.focus()}
+          disabled={isCounting}
         />
       </div>
       <div className="grid gap-1 text-center">
         <Label htmlFor="seconds" className="text-xs">
-          Seconds
+          秒
         </Label>
         <TimePickerInput
           picker="seconds"
@@ -49,6 +56,7 @@ export default function TimePickerDemo({ date, setDate }: TimePickerDemoProps) {
           setDate={setDate}
           ref={secondRef}
           onLeftFocus={() => minuteRef.current?.focus()}
+          disabled={isCounting}
         />
       </div>
     </div>
