@@ -3,7 +3,6 @@ import { Clock, CirclePause } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { parseDateToTimer } from "@/lib/utils";
 import { useVideo } from "./video-provider";
-import urlParser from "js-video-url-parser";
 
 type CountdownProps = {
   triggerTime: Date;
