@@ -3,6 +3,7 @@ import { Clock, CirclePause } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { parseDateToTimer } from "@/lib/utils";
 import { useVideo } from "./video-provider";
+import urlParser from "js-video-url-parser";
 
 type CountdownProps = {
   triggerTime: Date;
@@ -17,7 +18,7 @@ export default function Countdown({
   isCounting,
   setIsCounting,
 }: CountdownProps) {
-  const { setVideoUrl } = useVideo();
+  const { videoUrl, setVideoUrl } = useVideo();
 
   const clearTimerRef = useRef<NodeJS.Timeout>();
 
@@ -68,7 +69,13 @@ export default function Countdown({
             const timeInMs = ((hours * 60 + minutes) * 60 + seconds) * 1000;
             setIsCounting(true);
             clearTimerRef.current = setTimeout(() => {
-              setVideoUrl((prev: string) => prev + "?&autoplay=1");
+              if (videoUrl.includes("&")) {
+                const original = videoUrl.split("&")[0];
+                setVideoUrl(original + "&autoplay=1" + `&${Math.random()}`);
+              } else {
+                setVideoUrl((prev: string) => prev + "?&autoplay=1");
+              }
+              return setIsCounting(false);
             }, timeInMs);
           }}
         >
