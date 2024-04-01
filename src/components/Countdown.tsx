@@ -2,22 +2,23 @@ import { Button } from "@/components/ui/button";
 import { Clock, CirclePause } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { parseDateToTimer } from "@/lib/utils";
+import { useVideo } from "./video-provider";
 
 type CountdownProps = {
   triggerTime: Date;
-  videoId: string;
   isCounting: boolean;
   setIsCounting: React.Dispatch<React.SetStateAction<boolean>>;
   setTriggerTime: React.Dispatch<React.SetStateAction<Date>>;
 };
 
 export default function Countdown({
-  videoId,
   triggerTime,
   setTriggerTime,
   isCounting,
   setIsCounting,
 }: CountdownProps) {
+  const { setVideoUrl } = useVideo();
+
   const clearTimerRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
@@ -67,7 +68,7 @@ export default function Countdown({
             const timeInMs = ((hours * 60 + minutes) * 60 + seconds) * 1000;
             setIsCounting(true);
             clearTimerRef.current = setTimeout(() => {
-              window.location.href = `https://www.youtube.com/watch?v=${videoId}`;
+              setVideoUrl((prev: string) => prev + "?&autoplay=1");
             }, timeInMs);
           }}
         >

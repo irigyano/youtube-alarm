@@ -1,14 +1,11 @@
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Input } from "@/components/ui/input";
 import urlParser from "js-video-url-parser";
+import { useVideo } from "./video-provider";
 
-function YoutubeFrame({
-  videoId,
-  setVideoId,
-}: {
-  videoId: string;
-  setVideoId: React.Dispatch<React.SetStateAction<string>>;
-}) {
+function YoutubeFrame({}: {}) {
+  const { videoId, videoUrl, setVideoId } = useVideo();
+
   return (
     <>
       <div>
@@ -16,7 +13,7 @@ function YoutubeFrame({
           {videoId && (
             <iframe
               className="w-full h-full rounded-md "
-              src={`https://www.youtube.com/embed/${videoId}?si=FweH2j9lGQNqviG3`}
+              src={videoUrl}
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
